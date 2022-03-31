@@ -1,12 +1,19 @@
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import Login from './components/login/login'
+import Main from './components/main/main'
 import React from 'react'
-import { Button } from 'antd-mobile'
+import Register from './components/register/register'
 
 
 function App() {
     return (
-        <div className="App">
-            <Button type="primary">Hello</Button>
-        </div>
+        <BrowserRouter>
+            <Switch>
+                <Route path="/login" component={Login} />
+                <Route path="/register" component={Register} />
+                <Route component={Main} />
+            </Switch>
+        </BrowserRouter>
     );
 }
 
