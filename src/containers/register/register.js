@@ -1,6 +1,11 @@
+import './register.less'
+import { connect } from 'react-redux'
 import { NavBar, WingBlank, List, InputItem, WhiteSpace, Radio, Button } from 'antd-mobile'
-import Logo from "../../components/logo/logo"
+import { Redirect } from 'react-router-dom'
+import { register } from '../../redux/actions'
+import Logo from '../../components/logo/logo'
 import React from 'react'
+
 
 class Register extends React.Component {
     state = {
@@ -16,8 +21,8 @@ class Register extends React.Component {
         })
     }
 
-    register = () => {
-        console.log(this.state)
+    handleRegister = () => {
+        this.props.register(this.state)
     }
 
     toLogin = () => {
@@ -25,10 +30,19 @@ class Register extends React.Component {
     }
 
     render() {
+        if (this.props.user.redirectTo) {
+            return <Redirect to={this.props.user.redirectTo}/>
+        }
         return (
             <div>
                 <NavBar>Silicon Valley</NavBar>
                 <Logo />
+                { this.props.user.msg
+                ?
+                <div className='error-msg'>{ this.props.user.msg }</div>
+                :
+                null
+                }
                 <WingBlank>
                     <List>
                         <WhiteSpace />
@@ -64,7 +78,7 @@ class Register extends React.Component {
                             >Recruiter</Radio>
                         </List.Item>
                         <WhiteSpace />
-                        <Button type="primary" onClick={this.register}>Signup</Button>
+                        <Button type="primary" onClick={this.handleRegister}>Signup</Button>
                         <WhiteSpace />
                         <Button onClick={this.toLogin}>Already registered</Button>
                     </List>
@@ -74,4 +88,9 @@ class Register extends React.Component {
     }
 }
 
-export default Register
+const mapStateToProps = state => {
+    return {
+        user: state.user
+    }
+}
+export default connect(mapStateToProps, {register})(Register)
