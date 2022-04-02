@@ -36,8 +36,9 @@ class Login extends React.Component {
 
                         <WhiteSpace />
                         <InputItem
-                            onChange={(val) => this.handleChange('password', val)} type="password"
-                        >Password</InputItem>
+                            onChange={(val) => this.handleChange('password', val)}
+                            type="password"
+                        >Password:</InputItem>
                         
                         <WhiteSpace />
                         <Button type="primary" onClick={this.login}>Login</Button>
