@@ -1,6 +1,11 @@
+import './login.less'
+import { connect } from 'react-redux'
+import { login } from '../../redux/actions'
 import { NavBar, WingBlank, List, InputItem, WhiteSpace, Button } from 'antd-mobile'
+import { Redirect } from 'react-router-dom'
 import Logo from "../../components/logo/logo"
 import React from 'react'
+
 
 class Login extends React.Component {
     state = {
@@ -14,8 +19,8 @@ class Login extends React.Component {
         })
     }
 
-    login = () => {
-        console.log(this.state)
+    handleLogin = () => {
+        this.props.login(this.state)
     }
 
     toRegister = () => {
@@ -23,10 +28,20 @@ class Login extends React.Component {
     }
 
     render() {
+        if (this.props.user.redirectTo) {
+            return <Redirect to={this.props.user.redirectTo} />
+        }
         return (
             <div>
                 <NavBar>Silicon Valley</NavBar>
                 <Logo />
+                {
+                    this.props.user.msg
+                    ?
+                    <div className="error-msg">{ this.props.user.msg }</div>
+                    :
+                    null
+                }
                 <WingBlank>
                     <List>
                         <WhiteSpace />
@@ -41,7 +56,7 @@ class Login extends React.Component {
                         >Password:</InputItem>
                         
                         <WhiteSpace />
-                        <Button type="primary" onClick={this.login}>Login</Button>
+                        <Button type="primary" onClick={this.handleLogin}>Login</Button>
                         <WhiteSpace />
                         <Button onClick={this.toRegister}>Not registered?</Button>
                     </List>
@@ -51,4 +66,10 @@ class Login extends React.Component {
     }
 }
 
-export default Login
+const mapStateToProps = state => {
+    return {
+        user: state.user
+    }
+}
+
+export default connect(mapStateToProps, {login})(Login)
