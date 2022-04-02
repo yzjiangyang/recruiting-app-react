@@ -7,4 +7,4 @@ import thunk from 'redux-thunk'
 export default createStore(
     reducers,
     composeWithDevTools(applyMiddleware(thunk))
-    )
+)
