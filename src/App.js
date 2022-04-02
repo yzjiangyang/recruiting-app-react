@@ -14,6 +14,7 @@ function App() {
                 <Switch>
                     <Route path="/login" component={Login} />
                     <Route path="/register" component={Register} />
+                    {/* If written on top, '/login'will match '/' as well */}
                     <Route component={Main} />
                 </Switch>
             </BrowserRouter>

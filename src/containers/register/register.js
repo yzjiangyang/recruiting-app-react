@@ -38,13 +38,15 @@ class Register extends React.Component {
 
                         <WhiteSpace />
                         <InputItem
-                            onChange={(val) => this.handleChange('password', val)} type="password"
-                        >Password</InputItem>
+                            onChange={(val) => this.handleChange('password', val)}
+                            type="password"
+                        >Password:</InputItem>
                         <WhiteSpace />
 
                         <InputItem
-                            onChange={(val) => this.handleChange('confirmPassword', val)} type="password"
-                        >Password</InputItem>
+                            onChange={(val) => this.handleChange('confirmPassword', val)}
+                            type="password"
+                        >Password:</InputItem>
 
                         <WhiteSpace />
                         <List.Item>
