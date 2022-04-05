@@ -13,9 +13,22 @@ export default class AvatarSelector extends React.Component {
             })
         }
     }
+
+    state = {
+        icon: null
+    }
+
+    handleClick = ({text, icon}) => {
+        this.setState({icon: icon})
+        this.props.setAvatar(text)
+    }
     
     render() {
-        const listHeader = 'Please Select An Avatar'
+        const listHeader = !this.state.icon ? 'Please Select An Avatar' : (
+            <div>
+                Selected: <img alt="" src={this.state.icon} />
+            </div>
+        )
         return (
             <List
                 renderHeader={() => listHeader}
