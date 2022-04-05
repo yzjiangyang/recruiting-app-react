@@ -47,11 +47,13 @@ class Login extends React.Component {
                         <WhiteSpace />
                         <InputItem
                             onChange={(val) => this.handleChange('username', val)}
+                            placeholder="Username"
                         >Username:</InputItem>
 
                         <WhiteSpace />
                         <InputItem
                             onChange={(val) => this.handleChange('password', val)}
+                            placeholder="Password"
                             type="password"
                         >Password:</InputItem>
                         
