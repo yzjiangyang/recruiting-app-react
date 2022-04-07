@@ -1,9 +1,12 @@
+import { connect } from 'react-redux';
 import { NavBar, InputItem, TextareaItem, Button } from "antd-mobile";
+import { Redirect } from 'react-router-dom';
+import { update } from '../../redux/actions';
 import AvatarSelector from "../../components/avatar-selector/avatar-selector";
 import React from "react";
 
 
-export default class ApplicantInfo extends React.Component {
+class ApplicantInfo extends React.Component {
     state = {
         avatar: "",
         position: "",
@@ -23,10 +26,14 @@ export default class ApplicantInfo extends React.Component {
     }
 
     save = () => {
-        console.log(this.state)
+        this.props.update(this.state)
     }
 
     render() {
+        // if filled out profile, redirect to home page
+        if (this.props.user.avatar) {
+            return <Redirect to='/applicant' />
+        }
         return (
             <div>
                 <NavBar>Fill Out Applicant Profile</NavBar>
@@ -48,3 +55,11 @@ export default class ApplicantInfo extends React.Component {
         )
     }
 }
+
+const mapStateToProps = (state) => {
+    return {
+        user: state.user
+    }
+}
+
+export default connect(mapStateToProps, {update})(ApplicantInfo)

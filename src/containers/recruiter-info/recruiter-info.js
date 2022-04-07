@@ -1,9 +1,12 @@
+import { connect } from 'react-redux';
 import { NavBar, InputItem, TextareaItem, Button } from "antd-mobile";
+import { Redirect } from 'react-router-dom';
+import { update } from '../../redux/actions';
 import AvatarSelector from "../../components/avatar-selector/avatar-selector";
 import React from "react";
 
 
-export default class RecruiterInfo extends React.Component {
+class RecruiterInfo extends React.Component {
     state = {
         avatar: '',
         position: '',
@@ -25,10 +28,13 @@ export default class RecruiterInfo extends React.Component {
     }
 
     save = () => {
-        console.log(this.state)
+        this.props.update(this.state)
     }
 
     render() {
+        if (this.props.user.avatar) {
+            return <Redirect to='/recruiter' />
+        }
         return (
             <div>
                 <NavBar>Fill Out Recruiter Profile</NavBar>
@@ -58,3 +64,10 @@ export default class RecruiterInfo extends React.Component {
         )
     }
 }
+
+const mapStateToProps = (state) => {
+    return {
+        user: state.user
+    }
+}
+export default connect(mapStateToProps, {update})(RecruiterInfo)
