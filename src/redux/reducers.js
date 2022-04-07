@@ -1,4 +1,4 @@
-import { AUTH_SUCCESS, ERROR_MSG } from './action-types'
+import { AUTH_SUCCESS, ERROR_MSG, RECEIVE_USER, RESET_USER } from './action-types'
 import { combineReducers } from 'redux'
 import { getRedirectTo } from '../utils'
 
@@ -21,6 +21,10 @@ const user = (state=initUser, action) => {
             } 
         case ERROR_MSG:
             return {...state, msg: action.data}
+        case RECEIVE_USER:
+            return {...state, ...action.data}
+        case RESET_USER:
+            return {...initUser, msg: action.data}
         default:
             return state
     }
