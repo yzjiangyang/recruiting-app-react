@@ -1,5 +1,6 @@
 import { AUTH_SUCCESS, ERROR_MSG, RECEIVE_USER, RESET_USER } from './action-types'
-import { reqRegister, reqLogin, reqUpdate } from '../api/index'
+import { reqRegister, reqLogin, reqUpdate, reqUser } from '../api/index'
+import axios from 'axios'
 
 
 // sync
@@ -68,6 +69,18 @@ export const update = (user) => {
         const response = await reqUpdate(user)
         const result = response.data
         if (result.code === 0) {
+            dispatch(receiveUser(result.data))
+        } else {
+            dispatch(resetUser(result.msg))
+        }
+    }
+}
+
+export const getUser = ()=> {
+    return async dispatch => {
+        const response = await axios.get("/user")
+        const result = response.data
+        if(result.code === 0) {
             dispatch(receiveUser(result.data))
         } else {
             dispatch(resetUser(result.msg))
