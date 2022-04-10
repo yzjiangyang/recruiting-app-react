@@ -30,7 +30,7 @@ class ApplicantInfo extends React.Component {
     }
 
     render() {
-        // if filled out profile, redirect to home
+        // if filled out profile, redirect to home page
         if (this.props.user.avatar) {
             return <Redirect to='/applicant' />
         }

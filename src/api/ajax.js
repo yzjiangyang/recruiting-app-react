@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const ajax = (url, data={}, method='GET') => {
+const ajax = (url, data={}, method) => {
     if (method === "GET") {
         let paramStr = ''
         Object.keys(data).forEach(key => {
