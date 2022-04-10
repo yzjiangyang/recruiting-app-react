@@ -8,16 +8,16 @@ import React from "react";
 
 class RecruiterInfo extends React.Component {
     state = {
-        avatar: '',
-        position: '',
+        header: '',
+        post: '',
         info: '',
         company: '',
         salary: ''
-    }
+        }
 
-    setAvatar = (avatar) => {
+    setAvatar = (header) => {
         this.setState({
-            avatar: avatar
+            header: header
         })
     }
 
@@ -32,7 +32,7 @@ class RecruiterInfo extends React.Component {
     }
 
     render() {
-        if (this.props.user.avatar) {
+        if (this.props.user.header) {
             return <Redirect to='/recruiter' />
         }
         return (

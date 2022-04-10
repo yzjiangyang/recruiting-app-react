@@ -1,11 +1,11 @@
-export const getRedirectTo = (type, avatar) => {
+export const getRedirectTo = (type, header) => {
     let path
     if (type === 'applicant') {
         path = '/applicant'
     } else {
         path = '/recruiter'
     }
-    if (!avatar) {
+    if (!header) {
         path += 'info'
     }
 
