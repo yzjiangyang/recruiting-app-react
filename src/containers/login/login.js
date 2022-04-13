@@ -1,8 +1,11 @@
 import './login.less'
 import { connect } from 'react-redux'
+import { getRedirectTo } from '../../utils'
+import { getUser } from '../../redux/actions'
 import { login } from '../../redux/actions'
 import { NavBar, WingBlank, List, InputItem, WhiteSpace, Button } from 'antd-mobile'
 import { Redirect } from 'react-router-dom'
+import Cookies from 'js-cookie'
 import Logo from "../../components/logo/logo"
 import React from 'react'
 
@@ -27,10 +30,26 @@ class Login extends React.Component {
         this.props.history.replace('/register')
     }
 
-    render() {
-        if (this.props.user.redirectTo) {
-            return <Redirect to={this.props.user.redirectTo} />
+    componentDidMount() {
+        // if request '/login' when already logged in, should go to home page
+        const userId = Cookies.get('userid')
+        const { user } = this.props
+        if (userId && !user._id) {
+            this.props.getUser()
         }
+    }
+
+    render() {
+        // if (this.props.user.redirectTo) {
+        //     return <Redirect to={this.props.user.redirectTo} />
+        // }
+        const userId = Cookies.get('userid')
+        const { user } = this.props
+        if (userId && user._id) {
+            const path = getRedirectTo(this.props.user.type, this.props.user.header)
+            return (<Redirect to={path} />)
+        }
+
         return (
             <div>
                 <NavBar>Silicon Valley</NavBar>
@@ -74,4 +93,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, {login})(Login)
+export default connect(mapStateToProps, {login, getUser})(Login)
