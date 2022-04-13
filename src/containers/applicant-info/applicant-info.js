@@ -40,12 +40,12 @@ class ApplicantInfo extends React.Component {
                 <AvatarSelector setAvatar={this.setAvatar}/>
                 <InputItem
                     placeholder="Position"
-                    onChange={(val) => this.handleChange('position', val)}
+                    onChange={(val) => this.handleChange('post', val)}
                 >Position:</InputItem>
                 <TextareaItem
                     title="Experience:"
                     rows={3}
-                    onChange={(val) => this.handleChange('experience', val)}
+                    onChange={(val) => this.handleChange('info', val)}
                 ></TextareaItem>
                 <Button
                     type="primary"

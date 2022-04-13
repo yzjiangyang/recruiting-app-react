@@ -41,7 +41,7 @@ class RecruiterInfo extends React.Component {
                 <AvatarSelector setAvatar={this.setAvatar} />
                 <InputItem
                     placeholder="Position"
-                    onChange={val => this.handleChange('position', val)}
+                    onChange={val => this.handleChange('post', val)}
                 >Position:</InputItem>
                 <InputItem
                     placeholder="Company"
